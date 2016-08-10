@@ -1,0 +1,19 @@
+body {
+	font-size: 17px;
+	color:White;
+	font-family: 'Lakki Reddy', cursive;
+    background-color: black;
+  	background-image: url(../images/crystal_ball.png); 
+  	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
+    background-size: 500px, 350px;
+    margin-top: 0%;
+    text-align: left;
+  }
+  
+  h1{
+    font-family: 'Lakki Reddy', cursive;
+    color:#d8bfd8;
+    text-decoration: underline;
+    }
