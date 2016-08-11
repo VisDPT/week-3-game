@@ -12,28 +12,30 @@ Your Guesses So Far: (the specific letters that the user typed. Display these un
 var psychicChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'x', 'y', 'z', 'v',];
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'x', 'y', 'z', 'v',];
 var correctGuess = false; //player didn't guess correctly
+var userGuessArray= [];
 
 
 
 // Declares the tallies to 0
 var wins = 0;
 var losses = 0;
-var guessesLeft =9;
+var guessesLeft = 9;
 
 
+// This sets the computer guess equal to the random. keep outside so that it doesnt change on every keyup
+//for (var guessesLeft=9; guessesLeft>0; guessesLeft--;){
+  var psychicLetter = psychicChoices[Math.floor(Math.random() * psychicChoices.length)];
+  console.log(psychicLetter);
+//  } //records psychic choice to console.log
 
 
 // When the user presses the key it records the keypress and then sets it to userguess
 document.onkeyup = function(event) { //captures key click
       var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-      document.getElementById("kp1").innerHTML = userGuess;
+      /*document.getElementById("kp1").innerHTML = userGuess; */
 
-      // This sets the computer guess equal to the random.
-      var psychicLetter = psychicChoices[Math.floor(Math.random() * psychicChoices.length)];
-      console.log(psychicLetter); //records psychic choice to console.log
-      
-
-
+      userGuessArray.push(userGuess);
+      console.log(userGuessArray);
     // Making sure the user chooses a letter   
     //if (userGuess == alphabet){
     if ((userGuess == 'a') || (userGuess == 'b') || (userGuess == 'c') ||
@@ -50,13 +52,46 @@ document.onkeyup = function(event) { //captures key click
       //DO I PUT THE BELOW IN A FOR LOOP to loop 9 times?
         if (userGuess == psychicLetter){
           wins =+ 1;
-          guessesLeft --;
+          guessesLeft--;
           console.log (wins + "Wins: " + guessesLeft + "guesses left!");
         }
-          else if (userGuess !== psychicLetter){
-            guessesLeft --;
+          else if (userGuess !== psychicLetter){            
+            guessesLeft--;
             console.log ("You have " +guessesLeft + "guesses left!")
           }
+          
+          // Taking the tallies and displaying them in HTML
+          var html = "<p>Press the letter I am thinking!</p>" +
+          "<p>wins: " + 
+          wins + 
+          "</p>" +
+          "<p>losses: " + 
+          losses + 
+          "</p>" +
+          "<p>Guesses Left: " + 
+          guessesLeft + 
+          "</p>" + 
+          "<p>What you guessed: " + 
+          userGuessArray + 
+          "</p>";
+
+        // Placing the html into the game ID
+          document.querySelector('#game').innerHTML = html;
+    /*
+      //Taking the tallies and displaying them in HTML
+        var html = "<p>Press the letter I am thinking of!</p>" +
+       "<p>wins: " + 
+        wins + 
+        "</p>" +
+        "<p>losses: " + 
+        losses + 
+        "</p>"+
+        "<p>Guesses Left: " + 
+        guessesLeft + 
+        "</p>" ; 
+
+      // Placing the html into the game ID
+        document.querySelector('#game').innerHTML = html;    */
     }
 }
       // It tests to determine if the computer or the user won the round and then increments 
@@ -116,12 +151,7 @@ var keyCode = e.keyCode;
 
 
 
-/*  } 
 
-
-  document.write("You have"+ i + "guesses");
-  console.log(i)''
-}
 
 
 
@@ -161,31 +191,4 @@ if (psychicLetter == userGuess){
   
 }
 */
-  /*
-
-  // This sets the psychic guess equal to the random.
-  var psychicChoice = psychicLetterChoice[Math.floor(Math.random() * psychicLetterChoice.length)];
-
-  if (userGuess ==psychicChoice) {
-    alert(wins++);
-  }  */
-
-
-
-/* 
-//GUESSES LEFT
-var guesses = 3;
-  		var guessesLeft = '['+guesses + ' guesses left]';
-  		questions -= 1; 
-  		document.write("Guesses Left: " + guessesLeft); */
-  	
  		
-/*Taking the tallies and displaying them in HTML
-        var html = <h1> The Psychic Game <h1>
-        "<p>Press the letter on the keyboard that you suspect I am thinking of!</p>" +
-        "<p>wins: " + wins + "</p>" +
-        "<p>losses: " + losses + "</p>" +
-        "<p> you guessed: " userGuess + "</p>" 
-        "<p>guesses left:" +guessCount+ "</p>"
- // Placing the html into the game ID
-        document.querySelector('#game').innerHTML = html;   */
