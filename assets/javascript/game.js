@@ -17,13 +17,13 @@ var correctGuess = false; //player didn't guess correctly
 // For tallies
 var wins = 0;
 var losses = 0;
-var guessesLeft= 10;
+var guessesLeft= 9;
 var userGuessArray= [];
 
 
 
 
-
+//****reset it when wins go tup
 // sets psychic/computer choice equal to the random. Kept outside so that it doesnt change on every keyup
 var psychicLetter = psychicChoices[Math.floor(Math.random() * psychicChoices.length)];
 console.log(psychicLetter); //records psychic choice to console.log
@@ -34,10 +34,13 @@ document.onkeyup = function(event) { //captures key click
     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
       /*document.getElementById("kp1").innerHTML = userGuess; */
 
+
+   
     userGuessArray.push(userGuess); //adds changing userGuess to userGuessArray
     //console.log(userGuessArray);
-
-    var userGuess9= userGuessArray.slice (0,9) //to show only 9 of user guesses on screen
+     //for (i=0; i<9; i++) {
+      //var userGuess9= userGuessArray.slice (0,9) //to show only 9 of user guesses on screen
+      
 
       // Making sure the user chooses a letter   
       //if (userGuess == alphabet){
@@ -52,26 +55,52 @@ document.onkeyup = function(event) { //captures key click
          (userGuess == 'y') || (userGuess == 'z'))  {
 
 
-         
+      
           if (userGuess == psychicLetter){
-            wins =+ 1;
-            guessesLeft--;
-          }
+            wins ++;
+            guessesLeft=9;
+            psychicLetter = psychicChoices[Math.floor(Math.random() * psychicChoices.length)];
+            console.log (psychicLetter);
 
-             //console.log (wins + "Wins: " + guessesLeft + "guesses left!");
+              
           
-          else if (userGuess !== psychicLetter){            
-            guessesLeft--;  
+              if (userGuess == psychicLetter){
+                  wins++;
+                  psychicLetter = psychicChoices[Math.floor(Math.random() * psychicChoices.length)];
+                  console.log (psychicLetter);
+                     
+              }
+                  else if (userGuess !== psychicLetter){             
+                  }  
+
           }
-            //Keeps guessesLeft fro going negative
-          
-            if (guessesLeft < 0) 
-              {guessesLeft = 9;
-                losses++;
-            }
+             //console.log (wins + "Wins: " + guessesLeft + "guesses left!");
+           
+            else if(userGuess !== psychicLetter){            
+                  guessesLeft--;
+              
+
+                    if (userGuess == psychicLetter){
+                      wins ++;
+                      guessesLeft=9;
+                      psychicLetter = psychicChoices[Math.floor(Math.random() * psychicChoices.length)];
+                      console.log (psychicLetter); 
+
+                    }
+                    else if (userGuess !== psychicLetter){            
+                    }     
+            }  
+
+              //resets everything when guessesLeft <0          
+              if (guessesLeft < 0) {
+                guessesLeft = 9;
+                  losses++;
+                  //userGuessArray.push(userGuess);
+                } 
+            
 
               // Taking the tallies and displaying them in HTML
-              var html = "<p>Press the letter I am thinking!</p>" +
+              var html = "<p>Press the letter I am thinking! You get 9 guesses!</p>" +
               "<p>WINS:   " + 
               wins + 
               "</p>" +
@@ -82,14 +111,16 @@ document.onkeyup = function(event) { //captures key click
               guessesLeft + 
               "</p>" + 
               "<p>LETTERS GUESSED:    " + 
-              userGuess9 + 
+              userGuessArray + 
               "</p>";
 
               // Placing the html into the game ID
               document.querySelector('#game').innerHTML = html;
         
-      }
+    }
 }
+
+
 
 //PLAN is to add losses at reset; add a reset button   
 
