@@ -56,26 +56,32 @@ document.onkeyup = function(event) { //captures key click
           if (userGuess == psychicLetter){
             wins =+ 1;
             guessesLeft--;
-            //console.log (wins + "Wins: " + guessesLeft + "guesses left!");
           }
-          else if (userGuess !== psychicLetter){            
-            guessesLeft--;
 
-            //console.log ("You have " +guessesLeft + "guesses left!")
+             //console.log (wins + "Wins: " + guessesLeft + "guesses left!");
+          
+          else if (userGuess !== psychicLetter){            
+            guessesLeft--;  
           }
-              
+            //Keeps guessesLeft fro going negative
+          
+            if (guessesLeft < 0) 
+              {guessesLeft = 9;
+                losses++;
+            }
+
               // Taking the tallies and displaying them in HTML
               var html = "<p>Press the letter I am thinking!</p>" +
-              "<p>wins: " + 
+              "<p>WINS:   " + 
               wins + 
               "</p>" +
-              "<p>losses: " + 
+              "<p>LOSSES:    " + 
               losses + 
               "</p>" +
-              "<p>Guesses Left: " + 
+              "<p>GUESSES LEFT:    " + 
               guessesLeft + 
               "</p>" + 
-              "<p>What you guessed: " + 
+              "<p>LETTERS GUESSED:    " + 
               userGuess9 + 
               "</p>";
 
