@@ -30,12 +30,10 @@ console.log(psychicLetter); //records psychic choice to console.log
 
 
 // When the user presses the key it records the keypress and then sets it to userguess
+
 document.onkeyup = function(event) { //captures key click
     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
       /*document.getElementById("kp1").innerHTML = userGuess; */
-
-
-   
     userGuessArray.push(userGuess); //adds changing userGuess to userGuessArray
     //console.log(userGuessArray);
      //for (i=0; i<9; i++) {
@@ -43,7 +41,6 @@ document.onkeyup = function(event) { //captures key click
       
 
       // Making sure the user chooses a letter   
-      //if (userGuess == alphabet){
       if ((userGuess == 'a') || (userGuess == 'b') || (userGuess == 'c') ||
          (userGuess == 'd') || (userGuess == 'e') || (userGuess == 'f') ||
          (userGuess == 'g') || (userGuess == 'h') || (userGuess == 'i') ||
@@ -53,29 +50,25 @@ document.onkeyup = function(event) { //captures key click
          (userGuess == 's') || (userGuess == 't') || (userGuess == 'u') ||
          (userGuess == 'v') || (userGuess == 'w') || (userGuess == 'x') ||
          (userGuess == 'y') || (userGuess == 'z'))  {
-
-
       
           if (userGuess == psychicLetter){
-            wins ++;
+            wins ++; //adds win
             guessesLeft=9;
+            userGuessArray= [];
             psychicLetter = psychicChoices[Math.floor(Math.random() * psychicChoices.length)];
             console.log (psychicLetter);
 
-              
-          
+
               if (userGuess == psychicLetter){
                   wins++;
+                  userGuessArray= [];
                   psychicLetter = psychicChoices[Math.floor(Math.random() * psychicChoices.length)];
-                  console.log (psychicLetter);
-                     
+                  console.log (psychicLetter);    
               }
                   else if (userGuess !== psychicLetter){             
                   }  
-
           }
-             //console.log (wins + "Wins: " + guessesLeft + "guesses left!");
-           
+             
             else if(userGuess !== psychicLetter){            
                   guessesLeft--;
               
@@ -83,6 +76,7 @@ document.onkeyup = function(event) { //captures key click
                     if (userGuess == psychicLetter){
                       wins ++;
                       guessesLeft=9;
+                      userGuessArray= [];
                       psychicLetter = psychicChoices[Math.floor(Math.random() * psychicChoices.length)];
                       console.log (psychicLetter); 
 
@@ -93,9 +87,9 @@ document.onkeyup = function(event) { //captures key click
 
               //resets everything when guessesLeft <0          
               if (guessesLeft < 0) {
-                guessesLeft = 9;
+                  guessesLeft = 9;
                   losses++;
-                  //userGuessArray.push(userGuess);
+                  userGuessArray= [];  
                 } 
             
 
