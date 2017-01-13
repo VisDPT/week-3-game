@@ -1,2 +1,1 @@
-# week-3-game
-Javascript Hw#3
+PSYCHIC LETTER GAME!
